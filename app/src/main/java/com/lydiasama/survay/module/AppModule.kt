@@ -1,9 +1,9 @@
-package com.lydiasama.survay.di
+package com.lydiasama.survay.module
 
 import org.koin.dsl.module
 
 val appModule = module {
-//		single { NetworkClient() }
+//	single { NetworkModule() }
 //		single { ApiService(get()) }
 //		single { ProfileRepository(get(), get()) }
 }
