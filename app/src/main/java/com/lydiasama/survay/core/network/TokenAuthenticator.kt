@@ -1,4 +1,4 @@
-package com.lydiasama.survay.network
+package com.lydiasama.survay.core.network
 
 import android.util.Log
 import com.lydiasama.survay.authentication.data.source.AuthenticationDataSource

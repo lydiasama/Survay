@@ -7,10 +7,10 @@ import com.lydiasama.survay.authentication.data.source.AuthenticationMapper
 import com.lydiasama.survay.authentication.data.source.AuthenticationService
 import com.lydiasama.survay.authentication.token.AccessToken
 import com.lydiasama.survay.authentication.token.AccessTokenDataSource
-import com.lydiasama.survay.network.AuthenticationInterceptor
-import com.lydiasama.survay.network.OkHttpClientFactory
-import com.lydiasama.survay.network.RetrofitFactory
-import com.lydiasama.survay.network.TokenAuthenticator
+import com.lydiasama.survay.core.network.AuthenticationInterceptor
+import com.lydiasama.survay.core.network.OkHttpClientFactory
+import com.lydiasama.survay.core.network.RetrofitFactory
+import com.lydiasama.survay.core.network.TokenAuthenticator
 import io.reactivex.functions.Function
 import okhttp3.Authenticator
 import okhttp3.Interceptor
@@ -30,7 +30,7 @@ val networkModule = module {
 	}
 	factory<AccessTokenDataSource> { AccessToken }
 	factory<Authenticator> { TokenAuthenticator(get(), get()) }
-	factory<Interceptor> { AuthenticationInterceptor() }
+	factory<Interceptor> { AuthenticationInterceptor(get()) }
 	factory {
 		OkHttpClientFactory(get(), get()).createOkHttpClient()
 	}

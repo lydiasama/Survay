@@ -1,4 +1,4 @@
-package com.lydiasama.survay.network
+package com.lydiasama.survay.core.network
 
 import com.google.gson.GsonBuilder
 import io.reactivex.schedulers.Schedulers

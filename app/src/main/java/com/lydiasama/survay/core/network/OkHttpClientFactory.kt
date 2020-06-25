@@ -1,4 +1,4 @@
-package com.lydiasama.survay.network
+package com.lydiasama.survay.core.network
 
 import okhttp3.Authenticator
 import okhttp3.Interceptor
