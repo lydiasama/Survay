@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.lydiasama.survay.authentication.data.source.AuthenticationDataSource
+import com.lydiasama.survay.authentication.token.AccessToken
 import com.lydiasama.survay.core.Event
 import com.lydiasama.survay.core.RxViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -20,6 +21,7 @@ class SplashViewModel(private val authenticationService: AuthenticationDataSourc
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
 				.subscribeBy(onNext = {
+					AccessToken.save(it)
 					_navigateToMainActivityEvent.value = Event(Unit)
 				}, onError = {
 					Log.d("AUTHEN", it.message ?: "")

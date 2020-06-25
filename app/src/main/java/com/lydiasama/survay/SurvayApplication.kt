@@ -1,8 +1,7 @@
 package com.lydiasama.survay
 
 import android.app.Application
-import com.lydiasama.survay.core.module.activityModule
-import com.lydiasama.survay.core.module.apiModule
+import com.lydiasama.survay.core.module.mainModule
 import com.lydiasama.survay.core.module.appModule
 import com.lydiasama.survay.core.module.networkModule
 import com.lydiasama.survay.core.module.splashModule
@@ -18,8 +17,7 @@ class SurvayApplication : Application() {
 			modules(
 					appModule,
 					networkModule,
-					apiModule,
-					activityModule,splashModule
+					mainModule, splashModule
 			)
 			androidLogger()
 		}
