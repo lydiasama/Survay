@@ -1,9 +1,9 @@
-package com.lydiasama.survay.data
+package com.lydiasama.survay.core
 
 import com.google.gson.Gson
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import com.lydiasama.survay.exception.RemoteException
+import com.lydiasama.survay.core.exception.RemoteException
 import okhttp3.Response
 
 data class ErrorData(@Expose val httpCode: Int = 500,
@@ -14,19 +14,23 @@ data class ErrorData(@Expose val httpCode: Int = 500,
 		fun fromResponse(response: Response): ErrorData = response.body
 				?.let { Gson().fromJson(it.string(), ErrorData::class.java) }
 				?.let { errorData ->
-					ErrorData(httpCode = response.code, message = response.message,
+					ErrorData(httpCode = response.code,
+							message = response.message,
 							errorCode = errorData.errorCode)
 				}
-				?: ErrorData(httpCode = response.code, message = "Something went wrong",
+				?: ErrorData(httpCode = response.code,
+						message = "Something went wrong",
 						errorCode = "500")
 
 		fun <T> fromResponse(response: retrofit2.Response<T>): ErrorData = try {
 			response.errorBody()
 					?.let { Gson().fromJson(it.string(), ErrorData::class.java) }
 					?.let { errorData ->
-						ErrorData(httpCode = response.code(), message = errorData.message,
+						ErrorData(
+								httpCode = response.code(), message = errorData.message,
 								errorCode = errorData.errorCode)
-					} ?: ErrorData(httpCode = response.code(), message = "Something went wrong",
+					} ?: ErrorData(
+					httpCode = response.code(), message = "Something went wrong",
 					errorCode = "500")
 		} catch (e: Exception) {
 			e.printStackTrace()
