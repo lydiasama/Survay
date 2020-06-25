@@ -7,8 +7,8 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-class RetrofitFactory(private val okHttpClient: OkHttpClient) {
-	fun createRetrofit(): Retrofit {
+object RetrofitFactory {
+	fun createRetrofit(okHttpClient: OkHttpClient): Retrofit {
 		val gsonBuilder = GsonBuilder().setLenient()
 		val gson = gsonBuilder.create()
 		val gsonConverterFactory = GsonConverterFactory.create(gson)
@@ -19,6 +19,19 @@ class RetrofitFactory(private val okHttpClient: OkHttpClient) {
 				.addConverterFactory(gsonConverterFactory)
 				.addCallAdapterFactory(rxJava2CallAdapterFactory)
 				.client(okHttpClient)
+				.build()
+	}
+
+	fun createRetrofitWithOutInterceptor(): Retrofit {
+		val gsonBuilder = GsonBuilder().setLenient()
+		val gson = gsonBuilder.create()
+		val gsonConverterFactory = GsonConverterFactory.create(gson)
+		val rxJava2CallAdapterFactory = RxJava2CallAdapterFactory.createWithScheduler(
+				Schedulers.io())
+		return Retrofit.Builder()
+				.baseUrl(Constants.BASE_URL)
+				.addConverterFactory(gsonConverterFactory)
+				.addCallAdapterFactory(rxJava2CallAdapterFactory)
 				.build()
 	}
 }
