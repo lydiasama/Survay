@@ -1,10 +1,10 @@
 package com.lydiasama.survay
 
 import android.app.Application
-import com.lydiasama.survay.module.activityModule
-import com.lydiasama.survay.module.apiModule
-import com.lydiasama.survay.module.appModule
-import com.lydiasama.survay.module.networkModule
+import com.lydiasama.survay.core.module.mainModule
+import com.lydiasama.survay.core.module.appModule
+import com.lydiasama.survay.core.module.networkModule
+import com.lydiasama.survay.core.module.splashModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -17,8 +17,7 @@ class SurvayApplication : Application() {
 			modules(
 					appModule,
 					networkModule,
-					apiModule,
-					activityModule
+					mainModule, splashModule
 			)
 			androidLogger()
 		}
