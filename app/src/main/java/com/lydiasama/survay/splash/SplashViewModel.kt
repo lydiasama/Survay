@@ -22,7 +22,7 @@ class SplashViewModel(private val authenticationService: AuthenticationDataSourc
 				.subscribeBy(onNext = {
 					_navigateToMainActivityEvent.value = Event(Unit)
 				}, onError = {
-					Log.d("AUTHEN", it.message)
+					Log.d("AUTHEN", it.message ?: "")
 				})
 				.addTo(compositeDisposable)
 	}
