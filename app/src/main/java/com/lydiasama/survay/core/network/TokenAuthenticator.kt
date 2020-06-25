@@ -10,8 +10,10 @@ import okhttp3.Route
 class TokenAuthenticator(private val authenticationDataSource: AuthenticationDataSource,
                          private val accessTokenDataSource: AccessTokenDataSource) : Authenticator {
 	override fun authenticate(route: Route?, response: Response): Request? {
+		val newToken = getNewToken()
+		accessTokenDataSource.save(newToken)
 		return response.request.newBuilder()
-				.addHeader("Authorization", "Bearer ${accessTokenDataSource.get()}")
+				.addHeader("Authorization", "Bearer $newToken")
 				.build()
 	}
 
