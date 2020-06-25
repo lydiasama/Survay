@@ -19,6 +19,6 @@ var mainModule = module {
 val splashModule = module {
 	scope<SplashActivity> {
 		authenticationDataSourceModule(this)
-		viewModel { SplashViewModel(get()) }
+		viewModel { SplashViewModel(get(), get()) }
 	}
 }
