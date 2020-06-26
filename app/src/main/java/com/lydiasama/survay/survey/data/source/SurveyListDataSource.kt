@@ -4,5 +4,5 @@ import com.lydiasama.survay.survey.data.SurveyItem
 import io.reactivex.Observable
 
 interface SurveyListDataSource {
-	fun getSurvayList(): Observable<List<SurveyItem>>
+	fun getSurveyList(page: Int): Observable<List<SurveyItem>>
 }
