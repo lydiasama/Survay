@@ -45,7 +45,6 @@ dependencies {
     def koinVersion = '2.1.5'
     // AndroidX
     implementation "org.koin:koin-androidx-scope:$koinVersion"
-    // AndroidX
     implementation "org.koin:koin-androidx-viewmodel:$koinVersion"
 
 
@@ -71,7 +70,26 @@ dependencies {
     implementation 'me.relex:circleindicator:2.1.4'
     implementation 'me.relex:circleindicator:2.1.4'
 
-    testImplementation 'junit:junit:4.12'
+    // Android testing
+    androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test.ext:truth:1.2.0'
+    androidTestImplementation 'org.mockito:mockito-android:2.7.22'
+
+    // Unit testing
+    testImplementation 'androidx.test:runner:1.2.0'
+    testImplementation 'androidx.test.ext:junit:1.1.1'
+    testImplementation 'androidx.test.espresso:espresso-intents:3.2.0'
+    testImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    testImplementation 'androidx.test.ext:truth:1.2.0'
+    testImplementation 'org.robolectric:robolectric:4.3.1'
+    testImplementation 'org.mockito:mockito-core:2.23.0'
+    testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0'
+    testImplementation 'android.arch.core:core-testing:1.1.1'
+
+    android {
+        testOptions.unitTests.includeAndroidResources = true
+    }
 }
