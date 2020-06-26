@@ -21,30 +21,26 @@ class MainViewModel(private val surveyListService: SurveyListDataSource) : RxVie
 	var page = 1
 	var surveyList = listOf<SurveyItem>()
 	fun getSurveyList() {
-		val saveSurveyListIfNotEmpty: (List<SurveyItem>) -> Unit = {
-			if (it.isNotEmpty()) {
-				page++
-				surveyList = surveyList + it
-				getSurveyList()
-			} else {
-				_surveyListLiveData.value = surveyList
-			}
-		}
-
 		surveyListService.getSurveyList(page)
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
-				.subscribeBy(onNext = saveSurveyListIfNotEmpty,
+				.subscribeBy(onNext = ::saveSurveyListIfNotEmpty,
 						onError = { Log.d("getSurveyList", it.toString()) })
 				.addTo(compositeDisposable)
 	}
 
-	fun slidePage() {
-		_pagePosition.value = _pagePosition.value?.plus(1)
+	fun saveSurveyListIfNotEmpty(newList: List<SurveyItem>) {
+		if (newList.isNotEmpty()) {
+			page++
+			surveyList = surveyList + newList
+			getSurveyList()
+		} else {
+			_surveyListLiveData.value = surveyList
+		}
 	}
 
-	fun slideToPage(page: Int) {
-		_pagePosition.value = page
+	fun slidePage() {
+		_pagePosition.value = _pagePosition.value?.plus(1)
 	}
 
 	fun resetPositionPage() {
