@@ -1,8 +1,8 @@
-package com.lydiasama.survay.survay.data
+package com.lydiasama.survay.survey.data
 
 import com.google.gson.annotations.SerializedName
 
-data class SurvayItem(
+data class SurveyItem(
 		@SerializedName("access_code_prompt")
 		val accessCodePrompt: Any = Any(),
 		@SerializedName("access_code_validation")
