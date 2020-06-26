@@ -25,6 +25,11 @@ class MainActivity : AppCompatActivity() {
 	}
 
 	private fun initListener() {
+		toolbar?.onClickRefreshButton = {
+			viewModel.getSurveyList()
+			viewModel.resetPositionPage()
+		}
+
 		surveyButton.setOnClickListener {
 			viewModel.slidePage()
 		}

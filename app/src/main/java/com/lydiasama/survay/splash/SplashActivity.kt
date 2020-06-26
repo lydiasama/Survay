@@ -21,5 +21,9 @@ class SplashActivity : AppCompatActivity() {
 			startActivity(MainActivity.getStartIntent(this))
 			finish()
 		})
+
+		viewModel.closeAppEvent.observe(this, EventObserver {
+			finish()
+		})
 	}
 }
