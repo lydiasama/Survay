@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.scope.lifecycleScope
 import org.koin.androidx.viewmodel.scope.viewModel
 
+
 class MainActivity : AppCompatActivity() {
 	private val viewModel by lifecycleScope.viewModel<MainViewModel>(this)
 	private val surveyListAdapter by lifecycleScope.inject<SurveyListAdapter>()
@@ -38,6 +39,9 @@ class MainActivity : AppCompatActivity() {
 	private fun setUpViewPager() {
 		surveyPager.adapter = surveyListAdapter
 		surveyPager.isUserInputEnabled = false
+
+		indicator.setViewPager(surveyPager)
+		surveyListAdapter.registerAdapterDataObserver(indicator.adapterDataObserver);
 	}
 
 	private fun observeViewModel() {
