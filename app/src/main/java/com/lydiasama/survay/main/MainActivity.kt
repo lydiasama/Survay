@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 	}
 
 	private fun observeViewModel() {
-		viewModel.survayListLiveData.observe(this, Observer {
+		viewModel.surveyListLiveData.observe(this, Observer {
 			//TODO submit list here
 			Log.d("getSurvayList", it.toString())
 		})
