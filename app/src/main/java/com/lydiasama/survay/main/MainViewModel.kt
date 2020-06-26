@@ -12,16 +12,34 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 
 class MainViewModel(private val surveyListService: SurveyListDataSource) : RxViewModel() {
-	private val _survayListLiveData = MutableLiveData<List<SurveyItem>>()
-	val surveyListLiveData: LiveData<List<SurveyItem>> = _survayListLiveData
+	private val _surveyListLiveData = MutableLiveData<List<SurveyItem>>()
+	val surveyListLiveData: LiveData<List<SurveyItem>> = _surveyListLiveData
 
-	fun getSurvayList() {
-		val onNext: (List<SurveyItem>) -> Unit = { _survayListLiveData.value = it }
+	private var _pagePosition = MutableLiveData(0)
+	val pagePosition: LiveData<Int> = _pagePosition
 
-		surveyListService.getSurvayList()
+	var page = 1
+	var surveyList = listOf<SurveyItem>()
+	fun getSurveyList() {
+		val saveSurveyListIfNotEmpty: (List<SurveyItem>) -> Unit = {
+			if (it.isNotEmpty()) {
+				page++
+				surveyList = surveyList + it
+				getSurveyList()
+			} else {
+				_surveyListLiveData.value = surveyList
+			}
+		}
+
+		surveyListService.getSurveyList(page)
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
-				.subscribeBy(onNext = onNext, onError = { Log.d("getSurvayList", it.toString()) })
+				.subscribeBy(onNext = saveSurveyListIfNotEmpty,
+						onError = { Log.d("getSurveyList", it.toString()) })
 				.addTo(compositeDisposable)
+	}
+
+	fun slidePage() {
+		_pagePosition.value = _pagePosition.value?.plus(1)
 	}
 }

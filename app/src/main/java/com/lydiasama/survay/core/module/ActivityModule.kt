@@ -3,6 +3,7 @@ package com.lydiasama.survay.core.module
 import com.lydiasama.survay.authentication.authenticationDataSourceModule
 import com.lydiasama.survay.main.MainActivity
 import com.lydiasama.survay.main.MainViewModel
+import com.lydiasama.survay.main.list.SurveyListAdapter
 import com.lydiasama.survay.splash.SplashActivity
 import com.lydiasama.survay.splash.SplashViewModel
 import com.lydiasama.survay.survey.surveyListDataSourceModule
@@ -13,6 +14,7 @@ var mainModule = module {
 	scope<MainActivity> {
 		surveyListDataSourceModule(this)
 		viewModel { MainViewModel(get()) }
+		scoped { SurveyListAdapter() }
 	}
 }
 
