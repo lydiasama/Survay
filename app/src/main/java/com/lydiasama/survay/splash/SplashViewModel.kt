@@ -1,6 +1,5 @@
 package com.lydiasama.survay.splash
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.lydiasama.survay.authentication.data.source.AuthenticationDataSource
@@ -17,6 +16,9 @@ class SplashViewModel(private val authenticationService: AuthenticationDataSourc
 	private val _navigateToMainActivityEvent = MutableLiveData<Event<Unit>>()
 	val navigateToMainActivityEvent: LiveData<Event<Unit>> = _navigateToMainActivityEvent
 
+	private val _closeAppEvent = MutableLiveData<Event<Unit>>()
+	val closeAppEvent: LiveData<Event<Unit>> = _closeAppEvent
+
 	fun login() {
 		authenticationService.getAccessToken()
 				.subscribeOn(Schedulers.io())
@@ -25,7 +27,7 @@ class SplashViewModel(private val authenticationService: AuthenticationDataSourc
 					accessTokenDataSource.save(it)
 					_navigateToMainActivityEvent.value = Event(Unit)
 				}, onError = {
-					Log.d("AUTHEN", it.message ?: "")
+					_closeAppEvent.value = Event(Unit)
 				})
 				.addTo(compositeDisposable)
 	}
