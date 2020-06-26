@@ -26,6 +26,17 @@
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
+	<me.relex.circleindicator.CircleIndicator3
+		android:id="@+id/indicator"
+		android:layout_width="48dp"
+		android:layout_height="0dp"
+		app:ci_height="10dp"
+		app:ci_orientation="vertical"
+		app:ci_width="10dp"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
 	<Button
 		android:id="@+id/surveyButton"
 		style="@style/buttonStyle"

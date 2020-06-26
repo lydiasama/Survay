@@ -43,6 +43,10 @@ class MainViewModel(private val surveyListService: SurveyListDataSource) : RxVie
 		_pagePosition.value = _pagePosition.value?.plus(1)
 	}
 
+	fun slideToPage(page: Int) {
+		_pagePosition.value = page
+	}
+
 	fun resetPositionPage() {
 		_pagePosition.value = 0
 	}
