@@ -9,6 +9,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.lydiasama.survay.R
 import com.lydiasama.survay.core.BaseActivity
 import com.lydiasama.survay.main.list.SurveyListAdapter
+import com.lydiasama.survay.util.loading.LoadingDialog
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.scope.lifecycleScope
 import org.koin.androidx.viewmodel.scope.viewModel
@@ -32,11 +33,15 @@ class MainActivity : BaseActivity() {
 		observeViewModel()
 		setUpViewPager()
 		initListener()
+		if (supportFragmentManager.findFragmentByTag(LoadingDialog.TAG) == null) {
+			this.showLoadingView()
+		}
 		viewModel.getSurveyList()
 	}
 
 	private fun initListener() {
 		toolbar?.onClickRefreshButton = {
+			this.showLoadingView()
 			viewModel.reFetchSurveyList()
 			viewModel.resetPagePosition()
 		}
@@ -60,20 +65,13 @@ class MainActivity : BaseActivity() {
 
 	private fun observeViewModel() {
 		viewModel.surveyListLiveData.observe(this, Observer {
+			this.hiddenLoadingView()
 			surveyListAdapter.submitList(it)
 			surveyButton?.visibility = View.VISIBLE
 		})
 
 		viewModel.pagePosition.observe(this, Observer {
 			surveyPager.setCurrentItem(it, true)
-		})
-
-		viewModel.isShowLoading.observe(this, Observer { showLoading ->
-			if (showLoading) {
-				this.showLoadingView()
-			} else {
-				this.hiddenLoadingView()
-			}
 		})
 	}
 

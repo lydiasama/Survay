@@ -18,17 +18,12 @@ class MainViewModel(private val surveyListService: SurveyListDataSource) : RxVie
 	private var _pagePosition = MutableLiveData(0)
 	val pagePosition: LiveData<Int> = _pagePosition
 
-	private var _isShowLoading = MutableLiveData(false)
-	val isShowLoading: LiveData<Boolean> = _isShowLoading
-
 	var page = 1
 	var surveyList = listOf<SurveyItem>()
 	fun getSurveyList() {
 		surveyListService.getSurveyList(page)
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
-				.doOnSubscribe { _isShowLoading.postValue(true) }
-				.doFinally { _isShowLoading.postValue(false) }
 				.subscribeBy(onNext = ::saveSurveyListIfNotEmpty,
 						onError = { Log.d("getSurveyList", it.toString()) })
 				.addTo(compositeDisposable)
