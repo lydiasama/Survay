@@ -13,6 +13,8 @@ import io.reactivex.Observable
 import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import org.mockito.ArgumentCaptor
+import org.mockito.Captor
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
@@ -100,6 +102,14 @@ class MainViewModelTest : BaseTest() {
 	}
 
 	@Test
+	fun `setPagePosition should set pagePosition with paramiter`() {
+		val pagePosition = 4
+		viewModel.setPagePosition(pagePosition)
+
+		assertEquals(pagePosition, viewModel.pagePosition.value)
+	}
+
+	@Test
 	fun `slidePage should increase pagePosition`() {
 		viewModel.slidePage()
 
@@ -107,9 +117,28 @@ class MainViewModelTest : BaseTest() {
 	}
 
 	@Test
-	fun `resetPositionPage should reset pagePosition to 0`() {
-		viewModel.resetPositionPage()
+	fun `resetPagePosition should reset pagePosition to 0`() {
+		viewModel.resetPagePosition()
 
 		assertEquals(0, viewModel.pagePosition.value)
+	}
+
+	@Captor
+	lateinit var acPage: ArgumentCaptor<Int>
+
+	@Test
+	fun `reFetchSurveyList should reset page before re-fetch list`() {
+		val surveyList = listOf(SurveyItem(
+				coverImageUrl = "mockCoverImg",
+				title = "title",
+				description = "description"))
+		whenever(surveyListService.getSurveyList(1)) doReturn Observable.just(surveyList)
+		whenever(surveyListService.getSurveyList(2)) doReturn Observable.empty()
+
+		viewModel.reFetchSurveyList()
+
+		verify(surveyListService, times(2)).getSurveyList(acPage.capture())
+		val capturedPage: List<Int> = acPage.allValues
+		assertEquals(1, capturedPage[0])
 	}
 }
