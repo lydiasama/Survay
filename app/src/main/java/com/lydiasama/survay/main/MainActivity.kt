@@ -3,17 +3,18 @@ package com.lydiasama.survay.main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.viewpager2.widget.ViewPager2
 import com.lydiasama.survay.R
+import com.lydiasama.survay.core.BaseActivity
 import com.lydiasama.survay.main.list.SurveyListAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.scope.lifecycleScope
 import org.koin.androidx.viewmodel.scope.viewModel
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 	private val viewModel by lifecycleScope.viewModel<MainViewModel>(this)
 	private val surveyListAdapter by lifecycleScope.inject<SurveyListAdapter>()
 
@@ -60,10 +61,19 @@ class MainActivity : AppCompatActivity() {
 	private fun observeViewModel() {
 		viewModel.surveyListLiveData.observe(this, Observer {
 			surveyListAdapter.submitList(it)
+			surveyButton?.visibility = View.VISIBLE
 		})
 
 		viewModel.pagePosition.observe(this, Observer {
 			surveyPager.setCurrentItem(it, true)
+		})
+
+		viewModel.isShowLoading.observe(this, Observer { showLoading ->
+			if (showLoading) {
+				this.showLoadingView()
+			} else {
+				this.hiddenLoadingView()
+			}
 		})
 	}
 

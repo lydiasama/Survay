@@ -6,7 +6,7 @@
 	android:layout_height="match_parent"
 	tools:context=".main.MainActivity">
 
-	<com.lydiasama.survay.util.SurveyToolbar
+	<com.lydiasama.survay.util.toolbar.SurveyToolbar
 		android:id="@+id/toolbar"
 		android:layout_width="match_parent"
 		android:layout_height="?attr/actionBarSize"
@@ -44,6 +44,7 @@
 		android:layout_height="wrap_content"
 		android:layout_marginBottom="@dimen/spacing_normal"
 		android:text="@string/take_the_survey"
+		android:visibility="gone"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"

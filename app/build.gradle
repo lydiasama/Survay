@@ -66,6 +66,9 @@ dependencies {
     //Glide
     implementation "com.github.bumptech.glide:glide:4.10.0"
 
+    //Lotie
+    implementation "com.airbnb.android:lottie:3.3.1"
+
     //Indicator
     implementation 'me.relex:circleindicator:2.1.4'
     implementation 'me.relex:circleindicator:2.1.4'

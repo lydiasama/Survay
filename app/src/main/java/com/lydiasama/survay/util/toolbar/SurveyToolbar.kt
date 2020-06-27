@@ -1,4 +1,4 @@
-package com.lydiasama.survay.util
+package com.lydiasama.survay.util.toolbar
 
 import android.content.Context
 import android.util.AttributeSet
