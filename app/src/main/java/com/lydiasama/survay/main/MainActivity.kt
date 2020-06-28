@@ -8,9 +8,12 @@ import androidx.lifecycle.Observer
 import androidx.viewpager2.widget.ViewPager2
 import com.lydiasama.survay.R
 import com.lydiasama.survay.core.BaseActivity
+import com.lydiasama.survay.core.EventObserver
 import com.lydiasama.survay.main.list.SurveyListAdapter
+import com.lydiasama.survay.util.dialog.DialogUtil
 import com.lydiasama.survay.util.loading.LoadingDialog
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.android.ext.android.inject
 import org.koin.androidx.scope.lifecycleScope
 import org.koin.androidx.viewmodel.scope.viewModel
 
@@ -18,6 +21,7 @@ import org.koin.androidx.viewmodel.scope.viewModel
 class MainActivity : BaseActivity() {
 	private val viewModel by lifecycleScope.viewModel<MainViewModel>(this)
 	private val surveyListAdapter by lifecycleScope.inject<SurveyListAdapter>()
+	private val dialogUtil by inject<DialogUtil>()
 
 	private val onChangePageCallback by lazy {
 		object : ViewPager2.OnPageChangeCallback() {
@@ -73,6 +77,20 @@ class MainActivity : BaseActivity() {
 		viewModel.pagePosition.observe(this, Observer {
 			surveyPager.setCurrentItem(it, true)
 		})
+
+		viewModel.errorEvent.observe(this, EventObserver {
+			displayDialog(it)
+		})
+	}
+
+	private fun displayDialog(message: String?) {
+		dialogUtil.showDialog(
+				context = this,
+				positiveText = getString(R.string.dialog_btn_ok),
+				onPositive = {
+					this.hiddenLoadingView()
+				}
+		)
 	}
 
 	companion object {

@@ -1,8 +1,8 @@
 package com.lydiasama.survay.main
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.lydiasama.survay.core.Event
 import com.lydiasama.survay.core.RxViewModel
 import com.lydiasama.survay.survey.data.SurveyItem
 import com.lydiasama.survay.survey.data.source.SurveyListDataSource
@@ -18,6 +18,9 @@ class MainViewModel(private val surveyListService: SurveyListDataSource) : RxVie
 	private var _pagePosition = MutableLiveData(0)
 	val pagePosition: LiveData<Int> = _pagePosition
 
+	private var _errorEvent = MutableLiveData<Event<String?>>()
+	val errorEvent: LiveData<Event<String?>> = _errorEvent
+
 	var page = 1
 	var surveyList = listOf<SurveyItem>()
 	fun getSurveyList() {
@@ -25,7 +28,7 @@ class MainViewModel(private val surveyListService: SurveyListDataSource) : RxVie
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
 				.subscribeBy(onNext = ::saveSurveyListIfNotEmpty,
-						onError = { Log.d("getSurveyList", it.toString()) })
+						onError = { _errorEvent.value = Event(it.message) })
 				.addTo(compositeDisposable)
 	}
 
