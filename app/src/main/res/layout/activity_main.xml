@@ -6,7 +6,7 @@
 	android:layout_height="match_parent"
 	tools:context=".main.MainActivity">
 
-	<com.lydiasama.survay.util.toolbar.SurveyToolbar
+	<com.lydiasama.survey.util.toolbar.SurveyToolbar
 		android:id="@+id/toolbar"
 		android:layout_width="match_parent"
 		android:layout_height="?attr/actionBarSize"
