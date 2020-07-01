@@ -2,4 +2,7 @@
 	<string name="app_name">Survey</string>
 	<string name="survey_toolbar">SURVEYS</string>
 	<string name="take_the_survey">Take the survey</string>
+	<string name="dialog_title">Sorry,</string>
+	<string name="dialog_btn_ok">OK</string>
+	<string name="dialog_default_message_error">Something went wrong,\nPlease try again later.</string>
 </resources>
