@@ -1,4 +1,4 @@
-package com.lydiasama.survey.main
+package com.lydiasama.survey.main.list
 
 import com.lydiasama.survey.core.BaseTest
 import com.lydiasama.survey.survey.data.SurveyItem
@@ -10,7 +10,7 @@ import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Observable
-import junit.framework.Assert.assertEquals
+import junit.framework.Assert
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentCaptor
@@ -18,10 +18,8 @@ import org.mockito.Captor
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
-
-class MainViewModelTest : BaseTest() {
-
-    private lateinit var viewModel: MainViewModel
+class SurveyListViewModelTest : BaseTest() {
+    private lateinit var viewModel: SurveyListViewModel
 
     @Mock
     lateinit var surveyListService: SurveyListDataSource
@@ -29,7 +27,7 @@ class MainViewModelTest : BaseTest() {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        viewModel = MainViewModel(surveyListService)
+        viewModel = SurveyListViewModel(surveyListService)
     }
 
     @Test
@@ -56,8 +54,8 @@ class MainViewModelTest : BaseTest() {
 
         viewModel.saveSurveyListIfNotEmpty(surveyList)
 
-        assertEquals(2, viewModel.page)
-        assertEquals(surveyList, viewModel.surveyList)
+        Assert.assertEquals(2, viewModel.page)
+        Assert.assertEquals(surveyList, viewModel.surveyList)
         verify(surveyListService).getSurveyList(any())
     }
 
@@ -83,8 +81,8 @@ class MainViewModelTest : BaseTest() {
 
         viewModel.saveSurveyListIfNotEmpty(surveyList1)
 
-        assertEquals(3, viewModel.page)
-        assertEquals(expectSurveyList, viewModel.surveyList)
+        Assert.assertEquals(3, viewModel.page)
+        Assert.assertEquals(expectSurveyList, viewModel.surveyList)
     }
 
     @Test
@@ -106,21 +104,21 @@ class MainViewModelTest : BaseTest() {
         val pagePosition = 4
         viewModel.setPagePosition(pagePosition)
 
-        assertEquals(pagePosition, viewModel.pagePosition.value)
+        Assert.assertEquals(pagePosition, viewModel.pagePosition.value)
     }
 
     @Test
     fun `slidePage should increase pagePosition`() {
         viewModel.slidePage()
 
-        assertEquals(1, viewModel.pagePosition.value)
+        Assert.assertEquals(1, viewModel.pagePosition.value)
     }
 
     @Test
     fun `resetPagePosition should reset pagePosition to 0`() {
         viewModel.resetPagePosition()
 
-        assertEquals(0, viewModel.pagePosition.value)
+        Assert.assertEquals(0, viewModel.pagePosition.value)
     }
 
     @Captor
@@ -139,6 +137,6 @@ class MainViewModelTest : BaseTest() {
 
         verify(surveyListService, times(2)).getSurveyList(acPage.capture())
         val capturedPage: List<Int> = acPage.allValues
-        assertEquals(1, capturedPage[0])
+        Assert.assertEquals(1, capturedPage[0])
     }
 }
