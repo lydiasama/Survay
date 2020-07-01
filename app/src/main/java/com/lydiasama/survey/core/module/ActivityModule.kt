@@ -3,7 +3,7 @@ package com.lydiasama.survey.core.module
 import com.lydiasama.survey.authentication.authenticationDataSourceModule
 import com.lydiasama.survey.main.MainActivity
 import com.lydiasama.survey.main.MainViewModel
-import com.lydiasama.survey.main.list.SurveyListAdapter
+import com.lydiasama.survey.main.list.adapter.SurveyListAdapter
 import com.lydiasama.survey.splash.SplashActivity
 import com.lydiasama.survey.splash.SplashViewModel
 import com.lydiasama.survey.survey.surveyListDataSourceModule

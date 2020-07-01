@@ -1,4 +1,4 @@
-package com.lydiasama.survey.main.list
+package com.lydiasama.survey.main.list.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +9,7 @@ import com.lydiasama.survey.R
 import com.lydiasama.survey.survey.data.SurveyItem
 import kotlinx.android.synthetic.main.item_survey.view.*
 
-class SurveyListViewHolder private constructor(view: View) :
-        RecyclerView.ViewHolder(view) {
+class SurveyListViewHolder private constructor(view: View) : RecyclerView.ViewHolder(view) {
     fun bind(surveyItem: SurveyItem) {
         itemView.titleText.text = surveyItem.title
         itemView.descriptionText.text = surveyItem.description

@@ -9,7 +9,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.lydiasama.survey.R
 import com.lydiasama.survey.core.BaseActivity
 import com.lydiasama.survey.core.EventObserver
-import com.lydiasama.survey.main.list.SurveyListAdapter
+import com.lydiasama.survey.main.list.adapter.SurveyListAdapter
 import com.lydiasama.survey.util.dialog.DialogUtil
 import com.lydiasama.survey.util.loading.LoadingDialog
 import kotlinx.android.synthetic.main.activity_main.*
