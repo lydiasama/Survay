@@ -7,7 +7,7 @@ android {
     buildToolsVersion "29.0.0"
 
     defaultConfig {
-        applicationId "com.lydiasama.survay"
+        applicationId "com.lydiasama.survey"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
