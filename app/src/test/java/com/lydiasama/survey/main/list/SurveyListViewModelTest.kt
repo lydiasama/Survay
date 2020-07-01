@@ -1,4 +1,4 @@
-package com.lydiasama.survey.main
+package com.lydiasama.survey.main.list
 
 import com.lydiasama.survey.core.BaseTest
 import com.lydiasama.survey.survey.data.SurveyItem
@@ -18,10 +18,8 @@ import org.mockito.Captor
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
-
-class MainViewModelTest : BaseTest() {
-
-    private lateinit var viewModel: MainViewModel
+class SurveyListViewModelTest : BaseTest() {
+    private lateinit var viewModel: SurveyListViewModel
 
     @Mock
     lateinit var surveyListService: SurveyListDataSource
@@ -29,7 +27,7 @@ class MainViewModelTest : BaseTest() {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        viewModel = MainViewModel(surveyListService)
+        viewModel = SurveyListViewModel(surveyListService)
     }
 
     @Test
@@ -107,13 +105,6 @@ class MainViewModelTest : BaseTest() {
         viewModel.setPagePosition(pagePosition)
 
         assertEquals(pagePosition, viewModel.pagePosition.value)
-    }
-
-    @Test
-    fun `slidePage should increase pagePosition`() {
-        viewModel.slidePage()
-
-        assertEquals(1, viewModel.pagePosition.value)
     }
 
     @Test

@@ -1,4 +1,4 @@
-package com.lydiasama.survey.main
+package com.lydiasama.survey.main.list
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,7 +11,7 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 
-class MainViewModel(private val surveyListService: SurveyListDataSource) : RxViewModel() {
+class SurveyListViewModel(private val surveyListService: SurveyListDataSource) : RxViewModel() {
     private val _surveyListLiveData = MutableLiveData<List<SurveyItem>>()
     val surveyListLiveData: LiveData<List<SurveyItem>> = _surveyListLiveData
 

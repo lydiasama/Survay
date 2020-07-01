@@ -1,4 +1,4 @@
-package com.lydiasama.survey.main.list
+package com.lydiasama.survey.main.list.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.lydiasama.survey.survey.data.SurveyItem

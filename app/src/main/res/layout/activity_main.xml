@@ -6,49 +6,16 @@
 	android:layout_height="match_parent"
 	tools:context=".main.MainActivity">
 
-	<com.lydiasama.survey.util.toolbar.SurveyToolbar
-		android:id="@+id/toolbar"
+	<androidx.fragment.app.FragmentContainerView
+		android:id="@+id/surveyNavHostFragment"
+		android:name="androidx.navigation.fragment.NavHostFragment"
 		android:layout_width="match_parent"
-		android:layout_height="?attr/actionBarSize"
-		android:background="@color/colorPrimary"
-		android:elevation="@dimen/toolbar_elevation"
+		android:layout_height="0dp"
+		app:defaultNavHost="true"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toTopOf="parent"
-		app:title="@string/survey_toolbar" />
-
-	<androidx.viewpager2.widget.ViewPager2
-		android:id="@+id/surveyPager"
-		android:layout_width="match_parent"
-		android:layout_height="0dp"
-		android:orientation="vertical"
-		app:layout_constraintBottom_toBottomOf="parent"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@id/toolbar" />
-
-	<me.relex.circleindicator.CircleIndicator3
-		android:id="@+id/indicator"
-		android:layout_width="48dp"
-		android:layout_height="0dp"
-		app:ci_height="10dp"
-		app:ci_orientation="vertical"
-		app:ci_width="10dp"
-		app:layout_constraintBottom_toBottomOf="parent"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintTop_toBottomOf="@id/toolbar" />
-
-	<Button
-		android:id="@+id/surveyButton"
-		style="@style/buttonStyle"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginBottom="@dimen/spacing_normal"
-		android:text="@string/take_the_survey"
-		android:visibility="gone"
-		app:layout_constraintBottom_toBottomOf="parent"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@id/toolbar"
-		app:layout_constraintVertical_bias="0.9" />
+		app:navGraph="@navigation/survey_navigation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

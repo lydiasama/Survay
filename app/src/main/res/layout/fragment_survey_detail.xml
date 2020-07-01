@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context=".main.detail.SurveyDetailFragment">
+
+	<ImageView
+		android:id="@+id/coverImage"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:adjustViewBounds="true"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+	<androidx.core.widget.NestedScrollView
+		android:id="@+id/surveyDetailScrollView"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:paddingBottom="@dimen/spacing_normal"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/coverImage">
+
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<TextView
+				android:id="@+id/titleText"
+				style="@style/titleText"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="@dimen/spacing_normal"
+				android:textAlignment="center"
+				android:textColor="@color/colorPrimaryDark"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				tools:text="Octave" />
+
+			<TextView
+				android:id="@+id/descriptionText"
+				style="@style/descriptionText"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/spacing_normal"
+				android:layout_marginTop="@dimen/spacing_small"
+				android:layout_marginEnd="@dimen/spacing_normal"
+				android:textAlignment="center"
+				android:textColor="@color/colorPrimaryDark"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@id/titleText"
+				tools:text="Octave Description" />
+
+			<TextView
+				android:id="@+id/thankEmailAboveThresholdText"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/spacing_normal"
+				android:layout_marginTop="@dimen/spacing_small"
+				android:layout_marginEnd="@dimen/spacing_normal"
+				android:textAlignment="center"
+				android:textColor="@color/colorPrimaryDark"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@id/descriptionText"
+				tools:text="Thank Email Above Threshold Text" />
+
+		</androidx.constraintlayout.widget.ConstraintLayout>
+
+	</androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
