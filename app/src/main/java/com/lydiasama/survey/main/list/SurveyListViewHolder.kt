@@ -10,22 +10,22 @@ import com.lydiasama.survey.survey.data.SurveyItem
 import kotlinx.android.synthetic.main.item_survey.view.*
 
 class SurveyListViewHolder private constructor(view: View) :
-		RecyclerView.ViewHolder(view) {
-	fun bind(surveyItem: SurveyItem) {
-		itemView.titleText.text = surveyItem.title
-		itemView.descriptionText.text = surveyItem.description
+        RecyclerView.ViewHolder(view) {
+    fun bind(surveyItem: SurveyItem) {
+        itemView.titleText.text = surveyItem.title
+        itemView.descriptionText.text = surveyItem.description
 
-		Glide.with(itemView)
-				.load(surveyItem.coverImageUrl.plus("l"))
-				.into(itemView.surveyImage)
-	}
+        Glide.with(itemView)
+                .load(surveyItem.coverImageUrl.plus("l"))
+                .into(itemView.surveyImage)
+    }
 
-	companion object {
-		fun newInstance(parent: ViewGroup): SurveyListViewHolder {
-			return SurveyListViewHolder(
-					LayoutInflater.from(parent.context)
-							.inflate(R.layout.item_survey, parent,
-									false))
-		}
-	}
+    companion object {
+        fun newInstance(parent: ViewGroup): SurveyListViewHolder {
+            return SurveyListViewHolder(
+                    LayoutInflater.from(parent.context)
+                            .inflate(R.layout.item_survey, parent,
+                                    false))
+        }
+    }
 }

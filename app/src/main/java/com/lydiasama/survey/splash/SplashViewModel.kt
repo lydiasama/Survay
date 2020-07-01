@@ -13,22 +13,22 @@ import io.reactivex.schedulers.Schedulers
 
 class SplashViewModel(private val authenticationService: AuthenticationDataSource,
                       private val accessTokenDataSource: AccessTokenDataSource) : RxViewModel() {
-	private val _navigateToMainActivityEvent = MutableLiveData<Event<Unit>>()
-	val navigateToMainActivityEvent: LiveData<Event<Unit>> = _navigateToMainActivityEvent
+    private val _navigateToMainActivityEvent = MutableLiveData<Event<Unit>>()
+    val navigateToMainActivityEvent: LiveData<Event<Unit>> = _navigateToMainActivityEvent
 
-	private val _closeAppEvent = MutableLiveData<Event<Unit>>()
-	val closeAppEvent: LiveData<Event<Unit>> = _closeAppEvent
+    private val _closeAppEvent = MutableLiveData<Event<Unit>>()
+    val closeAppEvent: LiveData<Event<Unit>> = _closeAppEvent
 
-	fun login() {
-		authenticationService.getAccessToken()
-				.subscribeOn(Schedulers.io())
-				.observeOn(AndroidSchedulers.mainThread())
-				.subscribeBy(onNext = {
-					accessTokenDataSource.save(it)
-					_navigateToMainActivityEvent.value = Event(Unit)
-				}, onError = {
-					_closeAppEvent.value = Event(Unit)
-				})
-				.addTo(compositeDisposable)
-	}
+    fun login() {
+        authenticationService.getAccessToken()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(onNext = {
+                    accessTokenDataSource.save(it)
+                    _navigateToMainActivityEvent.value = Event(Unit)
+                }, onError = {
+                    _closeAppEvent.value = Event(Unit)
+                })
+                .addTo(compositeDisposable)
+    }
 }

@@ -19,81 +19,81 @@ import org.koin.androidx.viewmodel.scope.viewModel
 
 
 class MainActivity : BaseActivity() {
-	private val viewModel by lifecycleScope.viewModel<MainViewModel>(this)
-	private val surveyListAdapter by lifecycleScope.inject<SurveyListAdapter>()
-	private val dialogUtil by inject<DialogUtil>()
+    private val viewModel by lifecycleScope.viewModel<MainViewModel>(this)
+    private val surveyListAdapter by lifecycleScope.inject<SurveyListAdapter>()
+    private val dialogUtil by inject<DialogUtil>()
 
-	private val onChangePageCallback by lazy {
-		object : ViewPager2.OnPageChangeCallback() {
-			override fun onPageSelected(position: Int) {
-				viewModel.setPagePosition(position)
-			}
-		}
-	}
+    private val onChangePageCallback by lazy {
+        object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                viewModel.setPagePosition(position)
+            }
+        }
+    }
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		setContentView(R.layout.activity_main)
-		observeViewModel()
-		setUpViewPager()
-		initListener()
-		if (supportFragmentManager.findFragmentByTag(LoadingDialog.TAG) == null) {
-			this.showLoadingView()
-		}
-		viewModel.getSurveyList()
-	}
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        observeViewModel()
+        setUpViewPager()
+        initListener()
+        if (supportFragmentManager.findFragmentByTag(LoadingDialog.TAG) == null) {
+            this.showLoadingView()
+        }
+        viewModel.getSurveyList()
+    }
 
-	private fun initListener() {
-		toolbar?.onClickRefreshButton = {
-			this.showLoadingView()
-			viewModel.reFetchSurveyList()
-			viewModel.resetPagePosition()
-		}
+    private fun initListener() {
+        toolbar?.onClickRefreshButton = {
+            this.showLoadingView()
+            viewModel.reFetchSurveyList()
+            viewModel.resetPagePosition()
+        }
 
-		surveyButton.setOnClickListener {
-			viewModel.slidePage()
-		}
-	}
+        surveyButton.setOnClickListener {
+            viewModel.slidePage()
+        }
+    }
 
-	private fun setUpViewPager() {
-		surveyPager.adapter = surveyListAdapter
-		indicator.setViewPager(surveyPager)
-		surveyListAdapter.registerAdapterDataObserver(indicator.adapterDataObserver)
-		surveyPager.registerOnPageChangeCallback(onChangePageCallback)
-	}
+    private fun setUpViewPager() {
+        surveyPager.adapter = surveyListAdapter
+        indicator.setViewPager(surveyPager)
+        surveyListAdapter.registerAdapterDataObserver(indicator.adapterDataObserver)
+        surveyPager.registerOnPageChangeCallback(onChangePageCallback)
+    }
 
-	override fun onDestroy() {
-		surveyPager.unregisterOnPageChangeCallback(onChangePageCallback)
-		super.onDestroy()
-	}
+    override fun onDestroy() {
+        surveyPager.unregisterOnPageChangeCallback(onChangePageCallback)
+        super.onDestroy()
+    }
 
-	private fun observeViewModel() {
-		viewModel.surveyListLiveData.observe(this, Observer {
-			this.hiddenLoadingView()
-			surveyListAdapter.submitList(it)
-			surveyButton?.visibility = View.VISIBLE
-		})
+    private fun observeViewModel() {
+        viewModel.surveyListLiveData.observe(this, Observer {
+            this.hiddenLoadingView()
+            surveyListAdapter.submitList(it)
+            surveyButton?.visibility = View.VISIBLE
+        })
 
-		viewModel.pagePosition.observe(this, Observer {
-			surveyPager.setCurrentItem(it, true)
-		})
+        viewModel.pagePosition.observe(this, Observer {
+            surveyPager.setCurrentItem(it, true)
+        })
 
-		viewModel.errorEvent.observe(this, EventObserver {
-			displayDialog(it)
-		})
-	}
+        viewModel.errorEvent.observe(this, EventObserver {
+            displayDialog(it)
+        })
+    }
 
-	private fun displayDialog(message: String?) {
-		dialogUtil.showDialog(
-				context = this,
-				positiveText = getString(R.string.dialog_btn_ok),
-				onPositive = {
-					this.hiddenLoadingView()
-				}
-		)
-	}
+    private fun displayDialog(message: String?) {
+        dialogUtil.showDialog(
+                context = this,
+                positiveText = getString(R.string.dialog_btn_ok),
+                onPositive = {
+                    this.hiddenLoadingView()
+                }
+        )
+    }
 
-	companion object {
-		fun getStartIntent(context: Context): Intent = Intent(context, MainActivity::class.java)
-	}
+    companion object {
+        fun getStartIntent(context: Context): Intent = Intent(context, MainActivity::class.java)
+    }
 }

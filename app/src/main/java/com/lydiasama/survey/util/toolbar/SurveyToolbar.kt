@@ -8,30 +8,30 @@ import kotlinx.android.synthetic.main.view_toolbar.view.*
 
 class SurveyToolbar @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null,
                                               defStyleAttr: Int = 0) :
-		LinearLayout(context, attrs, defStyleAttr) {
+        LinearLayout(context, attrs, defStyleAttr) {
 
-	var onClickRefreshButton: (() -> Unit)? = null
+    var onClickRefreshButton: (() -> Unit)? = null
 
-	init {
-		inflate(context, R.layout.view_toolbar, this)
+    init {
+        inflate(context, R.layout.view_toolbar, this)
 
-		attrs?.let {
-			processAttributes(context, it)
-		}
+        attrs?.let {
+            processAttributes(context, it)
+        }
 
-		setOnClickRefreshButton()
-	}
+        setOnClickRefreshButton()
+    }
 
-	private fun setOnClickRefreshButton() {
-		toolbarLeftButton.setOnClickListener { onClickRefreshButton?.invoke() }
-	}
+    private fun setOnClickRefreshButton() {
+        toolbarLeftButton.setOnClickListener { onClickRefreshButton?.invoke() }
+    }
 
-	private fun processAttributes(context: Context, attrs: AttributeSet?) {
-		val attributes = context.obtainStyledAttributes(attrs, R.styleable.SurveyToolbar)
-		toolbarTitle.text = attributes.getString(
-				R.styleable.SurveyToolbar_title) ?: ""
+    private fun processAttributes(context: Context, attrs: AttributeSet?) {
+        val attributes = context.obtainStyledAttributes(attrs, R.styleable.SurveyToolbar)
+        toolbarTitle.text = attributes.getString(
+                R.styleable.SurveyToolbar_title) ?: ""
 
-		attributes.recycle()
-	}
+        attributes.recycle()
+    }
 
 }

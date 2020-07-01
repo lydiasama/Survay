@@ -1,4 +1,4 @@
-package com.lydiasama.survay.core.di
+package com.lydiasama.survey.core.di
 
 import org.koin.dsl.ScopeDSL
 

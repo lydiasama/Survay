@@ -4,5 +4,5 @@ import io.reactivex.Observable
 
 
 interface AuthenticationDataSource {
-	fun getAccessToken(): Observable<String>
+    fun getAccessToken(): Observable<String>
 }
