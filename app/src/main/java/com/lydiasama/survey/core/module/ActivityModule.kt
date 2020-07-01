@@ -2,6 +2,8 @@ package com.lydiasama.survey.core.module
 
 import com.lydiasama.survey.authentication.authenticationDataSourceModule
 import com.lydiasama.survey.main.MainActivity
+import com.lydiasama.survey.main.detail.SurveyDetailFragment
+import com.lydiasama.survey.main.detail.SurveyDetailViewModel
 import com.lydiasama.survey.main.list.SurveyListFragment
 import com.lydiasama.survey.main.list.SurveyListViewModel
 import com.lydiasama.survey.main.list.adapter.SurveyListAdapter
@@ -30,5 +32,11 @@ val surveyListModule = module {
         viewModel { SurveyListViewModel(get()) }
         scoped { SurveyListAdapter() }
         scoped<DialogUtil> { DialogUtilImpl }
+    }
+}
+
+val surveyDetailModule = module {
+    scope<SurveyDetailFragment> {
+        viewModel { SurveyDetailViewModel() }
     }
 }

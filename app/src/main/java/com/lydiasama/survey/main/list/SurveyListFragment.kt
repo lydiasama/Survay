@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.lydiasama.survey.R
 import com.lydiasama.survey.core.BaseFragment
@@ -58,7 +59,7 @@ class SurveyListFragment : BaseFragment() {
         }
 
         surveyButton.setOnClickListener {
-            viewModel.slidePage()
+            navigateToSurveyDetailPage()
         }
     }
 
@@ -99,6 +100,13 @@ class SurveyListFragment : BaseFragment() {
                         this.hiddenLoadingView()
                     }
             )
+        }
+    }
+
+    private fun navigateToSurveyDetailPage() {
+        viewModel.pagePosition.value?.let {
+            findNavController().navigate(SurveyListFragmentDirections.toSurveyDetailFragment(
+                    viewModel.surveyList[it]))
         }
     }
 }
