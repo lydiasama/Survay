@@ -10,7 +10,7 @@ import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Observable
-import junit.framework.Assert
+import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentCaptor
@@ -54,8 +54,8 @@ class SurveyListViewModelTest : BaseTest() {
 
         viewModel.saveSurveyListIfNotEmpty(surveyList)
 
-        Assert.assertEquals(2, viewModel.page)
-        Assert.assertEquals(surveyList, viewModel.surveyList)
+        assertEquals(2, viewModel.page)
+        assertEquals(surveyList, viewModel.surveyList)
         verify(surveyListService).getSurveyList(any())
     }
 
@@ -81,8 +81,8 @@ class SurveyListViewModelTest : BaseTest() {
 
         viewModel.saveSurveyListIfNotEmpty(surveyList1)
 
-        Assert.assertEquals(3, viewModel.page)
-        Assert.assertEquals(expectSurveyList, viewModel.surveyList)
+        assertEquals(3, viewModel.page)
+        assertEquals(expectSurveyList, viewModel.surveyList)
     }
 
     @Test
@@ -104,21 +104,14 @@ class SurveyListViewModelTest : BaseTest() {
         val pagePosition = 4
         viewModel.setPagePosition(pagePosition)
 
-        Assert.assertEquals(pagePosition, viewModel.pagePosition.value)
-    }
-
-    @Test
-    fun `slidePage should increase pagePosition`() {
-        viewModel.slidePage()
-
-        Assert.assertEquals(1, viewModel.pagePosition.value)
+        assertEquals(pagePosition, viewModel.pagePosition.value)
     }
 
     @Test
     fun `resetPagePosition should reset pagePosition to 0`() {
         viewModel.resetPagePosition()
 
-        Assert.assertEquals(0, viewModel.pagePosition.value)
+        assertEquals(0, viewModel.pagePosition.value)
     }
 
     @Captor
@@ -137,6 +130,6 @@ class SurveyListViewModelTest : BaseTest() {
 
         verify(surveyListService, times(2)).getSurveyList(acPage.capture())
         val capturedPage: List<Int> = acPage.allValues
-        Assert.assertEquals(1, capturedPage[0])
+        assertEquals(1, capturedPage[0])
     }
 }
