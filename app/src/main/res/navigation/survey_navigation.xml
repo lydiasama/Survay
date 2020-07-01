@@ -16,7 +16,11 @@
 	</fragment>
 	<fragment
 		android:id="@+id/surveyDetailFragment"
-		android:name="com.lydiasama.survey.main.list.SurveyListFragment"
+		android:name="com.lydiasama.survey.main.detail.SurveyDetailFragment"
 		android:label="Survey Detail"
-		tools:layout="@layout/fragment_survey_list" />
+		tools:layout="@layout/fragment_survey_detail">
+		<argument
+			android:name="surveyItem"
+			app:argType="com.lydiasama.survey.survey.data.SurveyItem" />
+	</fragment>
 </navigation>
