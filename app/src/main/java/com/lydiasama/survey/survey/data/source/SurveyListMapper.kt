@@ -9,15 +9,15 @@ import retrofit2.Response
 import javax.net.ssl.HttpsURLConnection
 
 class SurveyListMapper : Function<Response<List<SurveyItem>>, List<SurveyItem>> {
-	override fun apply(response: Response<List<SurveyItem>>): List<SurveyItem> {
-		return if (response.code() == HttpsURLConnection.HTTP_OK) {
-			Log.d("SurvayListMapper", "body : ${response.body()
-					.toString()}")
-			response.body() ?: throw RemoteException(code = response.code(),
-					msg = ErrorData.fromResponse(response).message)
-		} else {
-			throw RemoteException(code = response.code(),
-					msg = ErrorData.fromResponse(response).message)
-		}
-	}
+    override fun apply(response: Response<List<SurveyItem>>): List<SurveyItem> {
+        return if (response.code() == HttpsURLConnection.HTTP_OK) {
+            Log.d("SurvayListMapper", "body : ${response.body()
+                    .toString()}")
+            response.body() ?: throw RemoteException(code = response.code(),
+                    msg = ErrorData.fromResponse(response).message)
+        } else {
+            throw RemoteException(code = response.code(),
+                    msg = ErrorData.fromResponse(response).message)
+        }
+    }
 }

@@ -12,11 +12,11 @@ import retrofit2.Response
 import retrofit2.Retrofit
 
 val authenticationDataSourceModule = object : SubModule {
-	override fun invoke(scopeDsl: ScopeDSL) {
-		scopeDsl.scoped<AuthenticationApi> {
-			get<Retrofit>().create(AuthenticationApi::class.java)
-		}
-		scopeDsl.scoped<Function<Response<AuthenticationResult>, AuthenticationResult>> { AuthenticationMapper() }
-		scopeDsl.scoped<AuthenticationDataSource> { AuthenticationService(get(), get()) }
-	}
+    override fun invoke(scopeDsl: ScopeDSL) {
+        scopeDsl.scoped<AuthenticationApi> {
+            get<Retrofit>().create(AuthenticationApi::class.java)
+        }
+        scopeDsl.scoped<Function<Response<AuthenticationResult>, AuthenticationResult>> { AuthenticationMapper() }
+        scopeDsl.scoped<AuthenticationDataSource> { AuthenticationService(get(), get()) }
+    }
 }

@@ -7,12 +7,12 @@ import com.lydiasama.survey.util.loading.LoadingContract
 
 @SuppressLint("Registered")
 open class BaseActivity : AppCompatActivity(), LoadingContract {
-	private val loadingProgressBar by lazy { ViewHelper.progressDialog() }
-	override fun showLoadingView() {
-		loadingProgressBar.show(this.supportFragmentManager)
-	}
+    private val loadingProgressBar by lazy { ViewHelper.progressDialog() }
+    override fun showLoadingView() {
+        loadingProgressBar.show(this.supportFragmentManager)
+    }
 
-	override fun hiddenLoadingView() {
-		loadingProgressBar.hide(this.supportFragmentManager)
-	}
+    override fun hiddenLoadingView() {
+        loadingProgressBar.hide(this.supportFragmentManager)
+    }
 }

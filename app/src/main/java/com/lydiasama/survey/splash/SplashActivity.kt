@@ -11,29 +11,29 @@ import org.koin.androidx.scope.lifecycleScope
 import org.koin.androidx.viewmodel.scope.viewModel
 
 class SplashActivity : AppCompatActivity() {
-	private val viewModel by lifecycleScope.viewModel<SplashViewModel>(this)
-	private val dialogUtil by inject<DialogUtil>()
+    private val viewModel by lifecycleScope.viewModel<SplashViewModel>(this)
+    private val dialogUtil by inject<DialogUtil>()
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		observeViewModel()
-		viewModel.login()
-	}
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        observeViewModel()
+        viewModel.login()
+    }
 
-	private fun observeViewModel() {
-		viewModel.navigateToMainActivityEvent.observe(this, EventObserver {
-			startActivity(MainActivity.getStartIntent(this))
-			finish()
-		})
+    private fun observeViewModel() {
+        viewModel.navigateToMainActivityEvent.observe(this, EventObserver {
+            startActivity(MainActivity.getStartIntent(this))
+            finish()
+        })
 
-		viewModel.closeAppEvent.observe(this, EventObserver {
-			dialogUtil.showDialog(
-					context = this,
-					positiveText = getString(R.string.dialog_btn_ok),
-					onPositive = {
-						finish()
-					}
-			)
-		})
-	}
+        viewModel.closeAppEvent.observe(this, EventObserver {
+            dialogUtil.showDialog(
+                    context = this,
+                    positiveText = getString(R.string.dialog_btn_ok),
+                    onPositive = {
+                        finish()
+                    }
+            )
+        })
+    }
 }
