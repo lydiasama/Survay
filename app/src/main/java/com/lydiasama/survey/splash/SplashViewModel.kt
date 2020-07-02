@@ -3,7 +3,7 @@ package com.lydiasama.survey.splash
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.lydiasama.survey.authentication.data.source.AuthenticationDataSource
-import com.lydiasama.survey.authentication.token.AccessTokenDataSource
+import com.lydiasama.survey.authentication.data.source.token.AccessTokenDataSource
 import com.lydiasama.survey.core.Event
 import com.lydiasama.survey.core.RxViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers

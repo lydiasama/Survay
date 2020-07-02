@@ -17,6 +17,6 @@ val authenticationDataSourceModule = object : SubModule {
             get<Retrofit>().create(AuthenticationApi::class.java)
         }
         scopeDsl.scoped<Function<Response<AuthenticationResult>, AuthenticationResult>> { AuthenticationMapper() }
-        scopeDsl.scoped<AuthenticationDataSource> { AuthenticationService(get(), get()) }
+        scopeDsl.scoped<AuthenticationDataSource> { AuthenticationService(get(), get(), get()) }
     }
 }
