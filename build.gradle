@@ -31,6 +31,9 @@ buildscript {
         mockitoKotlinVersion = "2.2.0"
         robolectricVersion = "4.3.1"
         archCoreVersion = "1.1.1"
+        wireMockVersion = "2.27.0"
+
+        wireMockPort = 8089
     }
     repositories {
         google()
