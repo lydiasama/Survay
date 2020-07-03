@@ -1,6 +1,7 @@
 package com.lydiasama.survey.core.network
 
 import com.google.gson.GsonBuilder
+import com.lydiasama.survey.BuildConfig.BASE_URL
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -15,7 +16,7 @@ object RetrofitFactory {
         val rxJava2CallAdapterFactory = RxJava2CallAdapterFactory.createWithScheduler(
                 Schedulers.io())
         return Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
+                .baseUrl(BASE_URL)
                 .addConverterFactory(gsonConverterFactory)
                 .addCallAdapterFactory(rxJava2CallAdapterFactory)
                 .client(okHttpClient)
@@ -29,7 +30,7 @@ object RetrofitFactory {
         val rxJava2CallAdapterFactory = RxJava2CallAdapterFactory.createWithScheduler(
                 Schedulers.io())
         return Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
+                .baseUrl(BASE_URL)
                 .addConverterFactory(gsonConverterFactory)
                 .addCallAdapterFactory(rxJava2CallAdapterFactory)
                 .build()

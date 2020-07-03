@@ -24,6 +24,8 @@ android {
         buildConfigField("String", "USERNAME", "\"${username}\"")
         buildConfigField("String", "PASSWORD", "\"${password}\"")
 
+        buildConfigField("String", "BASE_URL", "\"https://nimble-survey-api.herokuapp.com\"")
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -34,9 +36,26 @@ android {
         }
     }
 
+    flavorDimensions "default"
+    productFlavors {
+        mock {
+            dimension "default"
+            buildConfigField("String", "BASE_URL", "\"http://127.0.0.1:$wireMockPort\"")
+            buildConfigField("Integer", "PORT", "8089")
+        }
+
+        dev {
+            dimension "default"
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
     }
 }
 
@@ -87,6 +106,7 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
     androidTestImplementation "androidx.test.ext:truth:$truthVersion"
     androidTestImplementation "org.mockito:mockito-android:$mockitoVersion"
+    androidTestImplementation "com.github.tomakehurst:wiremock:2.8.0"
 
     // Unit testing
     testImplementation "androidx.test:runner:$testRunnerVersion"
@@ -97,4 +117,5 @@ dependencies {
     testImplementation "org.robolectric:robolectric:$robolectricVersion"
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion"
     testImplementation "android.arch.core:core-testing:$archCoreVersion"
+    testImplementation "com.github.tomakehurst:wiremock-jre8-standalone:$wireMockVersion"
 }
