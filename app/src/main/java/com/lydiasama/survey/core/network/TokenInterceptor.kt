@@ -1,6 +1,6 @@
 package com.lydiasama.survey.core.network
 
-import com.lydiasama.survey.authentication.data.source.token.AccessTokenDataSource
+import com.lydiasama.survey.core.services.token.AccessTokenDataSource
 import okhttp3.Interceptor
 import okhttp3.Response
 

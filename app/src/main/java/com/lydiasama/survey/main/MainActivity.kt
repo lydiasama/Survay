@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.lydiasama.survey.R
-import com.lydiasama.survey.core.BaseActivity
+import com.lydiasama.survey.core.ui.BaseActivity
 
 
 class MainActivity : BaseActivity() {

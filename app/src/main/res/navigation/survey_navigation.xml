@@ -7,7 +7,7 @@
 
 	<fragment
 		android:id="@+id/surveyListFragment"
-		android:name="com.lydiasama.survey.main.list.SurveyListFragment"
+		android:name="com.lydiasama.survey.main.list.presenter.SurveyListFragment"
 		android:label="Survey List"
 		tools:layout="@layout/fragment_survey_list">
 		<action
@@ -16,11 +16,11 @@
 	</fragment>
 	<fragment
 		android:id="@+id/surveyDetailFragment"
-		android:name="com.lydiasama.survey.main.detail.SurveyDetailFragment"
+		android:name="com.lydiasama.survey.main.detail.presenter.SurveyDetailFragment"
 		android:label="Survey Detail"
 		tools:layout="@layout/fragment_survey_detail">
 		<argument
 			android:name="surveyItem"
-			app:argType="com.lydiasama.survey.survey.data.SurveyItem" />
+			app:argType="com.lydiasama.survey.main.list.data.SurveyItem" />
 	</fragment>
 </navigation>
