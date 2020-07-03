@@ -15,7 +15,7 @@
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme">
 		<activity
-			android:name="com.lydiasama.survey.splash.SplashActivity"
+			android:name="com.lydiasama.survey.splash.presenter.SplashActivity"
 			android:launchMode="singleTask"
 			android:screenOrientation="portrait"
 			android:theme="@style/SplashTheme">
